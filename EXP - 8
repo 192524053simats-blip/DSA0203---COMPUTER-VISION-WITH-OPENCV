@@ -1,0 +1,37 @@
+from google.colab import files
+uploaded = files.upload()
+
+import cv2
+import matplotlib.pyplot as plt
+
+# Read image
+image_path = list(uploaded.keys())[0]
+img = cv2.imread(image_path)
+img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
+
+# Bigger Image
+bigger = cv2.resize(img, None, fx=2, fy=2, interpolation=cv2.INTER_LINEAR)
+
+# Smaller Image
+smaller = cv2.resize(img, None, fx=0.5, fy=0.5, interpolation=cv2.INTER_AREA)
+
+# Input Image
+plt.figure(figsize=(5,5))
+plt.imshow(img)
+plt.title("Input Image")
+plt.axis("off")
+plt.show()
+
+# Bigger Image
+plt.figure(figsize=(6,6))
+plt.imshow(bigger)
+plt.title("Output - Bigger Image")
+plt.axis("off")
+plt.show()
+
+# Smaller Image
+plt.figure(figsize=(4,4))
+plt.imshow(smaller)
+plt.title("Output - Smaller Image")
+plt.axis("off")
+plt.show()
