@@ -1,0 +1,32 @@
+from google.colab import files
+uploaded = files.upload()
+
+import cv2
+import matplotlib.pyplot as plt
+
+# Read uploaded image
+image_path = list(uploaded.keys())[0]
+img = cv2.imread(image_path)
+
+if img is None:
+    print("Error: Image could not be read.")
+else:
+    # Convert to grayscale
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+
+    # Canny edge detection
+    edges = cv2.Canny(gray, 100, 200)
+
+    # Input
+    plt.figure(figsize=(6, 5))
+    plt.imshow(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    plt.title("Input Image")
+    plt.axis("off")
+    plt.show()
+
+    # Output
+    plt.figure(figsize=(6, 5))
+    plt.imshow(edges, cmap="gray")
+    plt.title("Output - Canny Edge Detection")
+    plt.axis("off")
+    plt.show()
